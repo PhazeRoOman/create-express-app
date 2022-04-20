@@ -1,0 +1,38 @@
+{
+  "name": "@yacinebenkaidali/create-be-app",
+  "version": "0.0.1",
+  "description": "A basic cli that creates a backend service.",
+  "main": "src/index.js",
+  "bin": {
+    "@yacinebenkaidali/create-be-app": "bin/create-be-app",
+    "create-app": "bin/create-be-app"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yacinebenkaidali/create-be-app.git"
+  },
+  "keywords": [
+    "Cli",
+    "Nodejs",
+    "Typescript",
+    "Javascript",
+    "create-be-app"
+  ],
+  "author": "Yacine BENKAIDALI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yacinebenkaidali/create-be-app/issues"
+  },
+  "homepage": "https://github.com/yacinebenkaidali/create-be-app#readme",
+  "dependencies": {
+    "arg": "^5.0.1",
+    "esm": "^3.2.25",
+    "inquirer": "^8.2.2"
+  }
+}
