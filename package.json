@@ -1,12 +1,17 @@
 {
-  "name": "@yacinebenkaidali/create-be-app",
+  "name": "@yacinebka/create-be-app",
   "version": "0.0.1",
   "description": "A basic cli that creates a backend service.",
   "main": "src/index.js",
   "bin": {
-    "@yacinebenkaidali/create-be-app": "bin/create-be-app",
+    "@yacinebka/create-be-app": "bin/create-be-app",
     "create-be-app": "bin/create-be-app"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/"
+  ],
   "publishConfig": {
     "access": "public"
   },
