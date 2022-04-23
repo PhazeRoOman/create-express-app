@@ -1,0 +1,17 @@
+{
+  "name": "typescript-be-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yacine BENKAIDALI <yacinebenkaidali@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
+}
