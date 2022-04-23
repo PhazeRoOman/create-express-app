@@ -1,4 +1,4 @@
-# `@yacinebka/create-be-project`
+# `@yacinebka/create-express-project`
 
 Personal CLI to bootstrap new Javascript/Typescript projects
 
@@ -7,9 +7,9 @@ Personal CLI to bootstrap new Javascript/Typescript projects
 ```bash
 npm init @yacinebka/project
 # or
-npx @yacinebka/create-be-project
+npx @yacinebka/create-express-project
 # or
-npm install -g @yacinebka/create-be-project
+npm install -g @yacinebka/create-express-project
 ```
 
 ## License
