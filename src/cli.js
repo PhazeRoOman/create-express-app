@@ -1,7 +1,8 @@
 import arg from "arg";
 import inquirer from "inquirer";
 import { createProject } from "./main";
-
+import boxen from "boxen";
+import chalk from "chalk";
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
     {
@@ -85,6 +86,22 @@ async function promptForMissingOptions(options) {
 }
 
 export async function cli(args) {
+  console.log(
+    "\n" +
+      boxen(
+        chalk.greenBright(
+          "Welcome to create express App,\nFollow these steps to setup your project"
+        ),
+        {
+          textAlignment: "center",
+          padding: 1,
+          margin: 1,
+          borderColor: "#2e7d32",
+          borderStyle: "double",
+        }
+      ) +
+      "\n"
+  );
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
   await createProject(options);
