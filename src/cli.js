@@ -102,6 +102,10 @@ export async function cli(args) {
       ) +
       "\n"
   );
+  console.log(
+    chalk.whiteBright("Author: Yacine BENKAIDALI <yacinebenkaidali@gmail.com>"),
+    "\n"
+  );
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
   await createProject(options);
