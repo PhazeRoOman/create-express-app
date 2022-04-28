@@ -7,7 +7,10 @@ import Listr from "listr";
 import { projectInstall } from "pkg-install";
 import mkdirp from "mkdirp";
 import { gitAddandCommit, initGit } from "./utils";
-
+import {
+  installEslintAndPrettier,
+  copyPrettierAndESlint,
+} from "./utils/static-analysis";
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
@@ -34,12 +37,17 @@ export async function createProject(options) {
     "../../templates",
     options.template.toLowerCase()
   );
+  const staticDir = path.resolve(
+    new URL(currentFileUrl).pathname,
+    "../../static"
+  );
   options.templateDirectory = templateDir;
+  options.staticDirectory = staticDir;
 
   try {
     await access(templateDir, fs.constants.R_OK);
   } catch (err) {
-    console.error("%s Invalid template name", chalk.red.bold("ERROR"));
+    console.error("%s Invalid template name", chalk.red.bold("[ERROR]"));
     process.exit(1);
   }
 
@@ -69,14 +77,32 @@ export async function createProject(options) {
           : undefined,
     },
     {
+      title: "Install static analysis tools",
+      task: async () => {
+        await installEslintAndPrettier({
+          workingDirectory: options.targetDirectory,
+          typescript: options.template.toLowerCase() === "typescript",
+        });
+        await copyPrettierAndESlint(options);
+      },
+      enabled: options.staticAnalysis,
+    },
+    {
       title: "Making first commit",
       task: () => gitAddandCommit(options),
       enabled: () => options.git,
     },
   ]);
+  try {
+    await tasks.run();
+  } catch (error) {
+    console.error(
+      "%s There was an unknown issue, please report this problem",
+      chalk.red.bold("[ERROR]")
+    );
+    process.exit(1);
+  }
 
-  await tasks.run();
-
-  console.log("%s Project is ready, Enjoy !", chalk.green.bold("DONE"));
+  console.log("%s Project is ready, Enjoy !", chalk.green.bold("[DONE]"));
   return true;
 }

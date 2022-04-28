@@ -10,6 +10,7 @@ function parseArgumentsIntoOptions(rawArgs) {
       "--yes": Boolean,
       "--install": Boolean,
       "--name": String,
+      "--linters": Boolean,
       "-g": "--git",
       "-y": "--yes",
       "-i": "--install",
@@ -24,6 +25,7 @@ function parseArgumentsIntoOptions(rawArgs) {
     template: args._[0],
     skipPrompts: args["--yes"] || false,
     git: args["--git"] || false,
+    staticAnalysis: args["--linters"] || false,
     runInstall: args["--install"] || false,
     projectName: args["--name"] || "",
   };
@@ -62,6 +64,15 @@ async function promptForMissingOptions(options) {
       type: "confirm",
       name: "git",
       message: "Initialize a git repository?",
+      default: false,
+    });
+  }
+
+  if (!options.staticAnalysis) {
+    questions.push({
+      type: "confirm",
+      name: "staticAnalysis",
+      message: "Do you wish to include ESlint and prettier default configs?",
       default: false,
     });
   }
