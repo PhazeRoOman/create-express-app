@@ -10,13 +10,11 @@
   "files": [
     "bin/",
     "src/",
-    "templates/"
+    "templates/",
+    "static/"
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -39,6 +37,7 @@
     "arg": "^5.0.1",
     "boxen": "^5.1.2",
     "chalk": "^4.1.2",
+    "cp-file": "^9.1.0",
     "esm": "^3.2.25",
     "execa": "^5.1.1",
     "inquirer": "^8.2.2",
