@@ -6,11 +6,17 @@ import { promisify } from "util";
 import Listr from "listr";
 import { projectInstall } from "pkg-install";
 import mkdirp from "mkdirp";
-import { gitAddandCommit, initGit } from "./utils";
 import {
+  initHusky,
+  gitAddandCommit,
+  initGit,
   installEslintAndPrettier,
   copyPrettierAndESlint,
-} from "./utils/static-analysis";
+} from "./utils";
+// import {
+//   installEslintAndPrettier,
+//   copyPrettierAndESlint,
+// } from "./utils/static-analysis";
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
@@ -85,7 +91,15 @@ export async function createProject(options) {
         });
         await copyPrettierAndESlint(options);
       },
-      enabled: options.staticAnalysis,
+      skip: () =>
+        !options.staticAnalysis
+          ? "Pass --install to automatically install dependencies"
+          : undefined,
+    },
+    {
+      title: "Setting up husky",
+      task: () => initHusky(options),
+      enabled: () => options.husky,
     },
     {
       title: "Making first commit",
