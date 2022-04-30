@@ -11,10 +11,12 @@ function parseArgumentsIntoOptions(rawArgs) {
       "--install": Boolean,
       "--name": String,
       "--linters": Boolean,
+      "--husky": Boolean,
       "-g": "--git",
       "-y": "--yes",
       "-i": "--install",
       "-n": "--name",
+      "-h": "--husky",
     },
     {
       //slice(2) because we don't need the first two args
@@ -28,6 +30,7 @@ function parseArgumentsIntoOptions(rawArgs) {
     staticAnalysis: args["--linters"] || false,
     runInstall: args["--install"] || false,
     projectName: args["--name"] || "",
+    husky: args["--husky"] || false,
   };
 }
 
@@ -77,6 +80,15 @@ async function promptForMissingOptions(options) {
     });
   }
 
+  if (!options.husky) {
+    questions.push({
+      type: "confirm",
+      name: "husky",
+      message: "Do you wish to setup Husky for git hooks?",
+      default: false,
+    });
+  }
+
   if (!options.runInstall) {
     questions.push({
       type: "confirm",
@@ -93,6 +105,8 @@ async function promptForMissingOptions(options) {
     git: options.git || answers.git,
     runInstall: options.runInstall || answers.runInstall,
     projectName: options.projectName || answers.projectName,
+    staticAnalysis: answers.staticAnalysis,
+    husky: (options.husky || answers.husky) && answers.staticAnalysis,
   };
 }
 
