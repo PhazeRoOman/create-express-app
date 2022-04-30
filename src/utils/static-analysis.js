@@ -30,8 +30,8 @@ async function copyPrettierAndESlint(options) {
   ];
   if (options.template.toLowerCase() === "typescript") {
     filesToCopy.push({
-      src: `${options.staticDirectory}/.eslintrc-typescript.js`,
-      dst: `${options.targetDirectory}/.eslintrc.js`,
+      src: `${options.staticDirectory}/.eslintrc-typescript.json`,
+      dst: `${options.targetDirectory}/.eslintrc.json`,
     });
   } else {
     filesToCopy.push({

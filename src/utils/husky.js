@@ -1,6 +1,6 @@
 import execa from "execa";
 async function initHusky(options) {
-  const result = await execa("npx", ["mrm@2 lint-staged"], {
+  const result = await execa("npx", ["mrm@2", "lint-staged"], {
     cwd: options.targetDirectory,
   });
   if (result.failed) {

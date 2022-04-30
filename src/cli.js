@@ -106,7 +106,7 @@ async function promptForMissingOptions(options) {
     runInstall: options.runInstall || answers.runInstall,
     projectName: options.projectName || answers.projectName,
     staticAnalysis: answers.staticAnalysis,
-    husky: options.husky || answers.husky,
+    husky: (options.husky || answers.husky) && answers.staticAnalysis,
   };
 }
 

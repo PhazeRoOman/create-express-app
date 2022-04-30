@@ -99,7 +99,14 @@ export async function createProject(options) {
     {
       title: "Setting up husky",
       task: () => initHusky(options),
-      enabled: () => options.husky,
+      enabled: () => {
+        if (options.git && options.husky && options.staticAnalysis) {
+          //it has to be a git repository and Eslint and prettier enabled to be applicable
+          console.log("okay");
+          return true;
+        }
+        return false;
+      },
     },
     {
       title: "Making first commit",
@@ -110,6 +117,7 @@ export async function createProject(options) {
   try {
     await tasks.run();
   } catch (error) {
+    console.log(error);
     console.error(
       "%s There was an unknown issue, please report this problem",
       chalk.red.bold("[ERROR]")

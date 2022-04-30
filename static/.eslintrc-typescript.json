@@ -1,0 +1,15 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest", // Allows the use of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"], // Uses the linting rules from @typescript-eslint/eslint-plugin
+  "plugins": ["eslint-plugin-prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-async-promise-executor": "off"
+  }
+}
