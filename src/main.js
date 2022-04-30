@@ -13,10 +13,6 @@ import {
   installEslintAndPrettier,
   copyPrettierAndESlint,
 } from "./utils";
-// import {
-//   installEslintAndPrettier,
-//   copyPrettierAndESlint,
-// } from "./utils/static-analysis";
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
@@ -93,19 +89,16 @@ export async function createProject(options) {
       },
       skip: () =>
         !options.staticAnalysis
-          ? "Pass --install to automatically install dependencies"
+          ? "Pass --linters to automatically add Eslint &pPrettier default configs"
           : undefined,
     },
     {
       title: "Setting up husky",
       task: () => initHusky(options),
-      enabled: () => {
-        if (options.git && options.husky && options.staticAnalysis) {
-          //it has to be a git repository and Eslint and prettier enabled to be applicable
-          console.log("okay");
-          return true;
-        }
-        return false;
+      skip: () => {
+        return !(options.git && options.staticAnalysis && options.husky)
+          ? "The repository has to be a git repository with default ESlint and prettier configs"
+          : undefined;
       },
     },
     {
