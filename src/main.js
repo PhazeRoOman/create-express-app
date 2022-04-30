@@ -110,7 +110,6 @@ export async function createProject(options) {
   try {
     await tasks.run();
   } catch (error) {
-    console.log(error);
     console.error(
       "%s There was an unknown issue, please report this problem",
       chalk.red.bold("[ERROR]")
