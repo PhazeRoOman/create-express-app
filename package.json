@@ -1,10 +1,10 @@
 {
-  "name": "@yacinebka/create-express-app",
+  "name": "@phazero/create-express-app",
   "version": "1.0.0",
   "description": "A basic cli that creates a backend service.",
   "main": "src/index.js",
   "bin": {
-    "@yacinebka/create-express-app": "bin/create-express-app",
+    "@phazero/create-express-app": "bin/create-express-app",
     "create-express-app": "bin/create-express-app"
   },
   "files": [
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yacinebenkaidali/create-express-app.git"
+    "url": "git+https://github.com/PhazeRoOman/create-express-app.git"
   },
   "keywords": [
     "Cli",
@@ -30,9 +30,9 @@
   "author": "Yacine BENKAIDALI",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yacinebenkaidali/create-express-app/issues"
+    "url": "https://github.com/PhazeRoOman/create-express-app/issues"
   },
-  "homepage": "https://github.com/yacinebenkaidali/create-express-app#readme",
+  "homepage": "https://github.com/PhazeRoOman/create-express-app#readme",
   "dependencies": {
     "arg": "^5.0.1",
     "boxen": "^5.1.2",
