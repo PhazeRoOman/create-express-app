@@ -1,11 +1,13 @@
 import chalk from "chalk";
 import fs from "fs";
 import ncp from "ncp";
+import cpFile from "cp-file";
 import path from "path";
 import { promisify } from "util";
 import Listr from "listr";
 import { projectInstall } from "pkg-install";
 import mkdirp from "mkdirp";
+import os from "os";
 import {
   initHusky,
   gitAddandCommit,
@@ -17,9 +19,15 @@ const access = promisify(fs.access);
 const copy = promisify(ncp);
 
 async function copyTemplateFiles(options) {
-  return copy(options.templateDirectory, options.targetDirectory, {
-    clobber: false,
-  });
+  return Promise.all([
+    copy(options.templateDirectory, options.targetDirectory, {
+      clobber: false,
+    }),
+    cpFile(
+      `${options.staticDirectory}/.gitignore`,
+      `${options.targetDirectory}/.gitignore`
+    ),
+  ]);
 }
 
 async function createDirectory(options) {
@@ -33,22 +41,27 @@ export async function createProject(options) {
       options.targetDirectory || `${process.cwd()}/${options.projectName}`,
   };
 
-  const currentFileUrl = import.meta.url;
-  const templateDir = path.resolve(
-    new URL(currentFileUrl).pathname,
+  const fullPathName = new URL(import.meta.url).pathname;
+  let templateDir = path.resolve(
+    fullPathName.substring(fullPathName.indexOf("/")),
     "../../templates",
     options.template.toLowerCase()
   );
-  const staticDir = path.resolve(
-    new URL(currentFileUrl).pathname,
+  let staticDir = path.resolve(
+    fullPathName.substring(fullPathName.indexOf("/")),
     "../../static"
   );
+  if (os.platform() == "win32") {
+    templateDir = templateDir.replace(/^(\w:\\)(\w:\\)/, "$2");
+    staticDir = staticDir.replace(/^(\w:\\)(\w:\\)/, "$2");
+  }
   options.templateDirectory = templateDir;
   options.staticDirectory = staticDir;
 
   try {
     await access(templateDir, fs.constants.R_OK);
   } catch (err) {
+    console.log({ err });
     console.error("%s Invalid template name", chalk.red.bold("[ERROR]"));
     process.exit(1);
   }
