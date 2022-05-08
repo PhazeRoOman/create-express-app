@@ -36,15 +36,17 @@ function parseArgumentsIntoOptions(rawArgs) {
 
 async function promptForMissingOptions(options) {
   const defaultTemplate = "JavaScript";
+  const defaultProjectName = "new-project";
   if (options.skipPrompts) {
     return {
       ...options,
       template: options.template || defaultTemplate,
+      projectName: options.projectName || defaultProjectName,
     };
   }
 
   const questions = [];
-  if (!options.template) {
+  if (!options.projectName) {
     questions.push({
       type: "input",
       name: "projectName",
@@ -112,26 +114,31 @@ async function promptForMissingOptions(options) {
 
 export async function cli(args) {
   console.log(
-    "\n" +
-      boxen(
-        chalk.greenBright(
+    boxen(
+      chalk
+        .hex("#50c9f5")
+        .bold(
           "Welcome to create express App,\nFollow these steps to setup your project"
         ),
-        {
-          textAlignment: "center",
-          padding: 1,
-          margin: 1,
-          borderColor: "#2e7d32",
-          borderStyle: "double",
-        }
-      ) +
-      "\n"
+      {
+        textAlignment: "center",
+        titleAlignment: "center",
+        padding: 1,
+        title: "PhazeRo",
+        margin: 1,
+        borderColor: "#4493ff",
+        borderStyle: "double",
+      }
+    ) + "\n"
   );
   console.log(
-    chalk.whiteBright("Author: Yacine BENKAIDALI <yacinebenkaidali@gmail.com>"),
+    chalk.hex("#edf2ff")(
+      "Author: Yacine BENKAIDALI <yacine.benkaidali@phaze.ro>"
+    ),
     "\n"
   );
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
   await createProject(options);
+  console.log("\n" + chalk.hex("#edf2ff")("Happy coding !"));
 }
