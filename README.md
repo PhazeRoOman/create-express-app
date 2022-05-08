@@ -2,6 +2,8 @@
 
 Create express app is a CLI that can generate boiler plate code for setting up an express app.
 
+<img src="https://user-images.githubusercontent.com/32792776/167292597-e2b0d798-fab4-47a7-bc63-219be2ff15f5.png" alt="CLI screenshot" width="600"/>
+
 ## Installation & Usage
 
 ```bash
