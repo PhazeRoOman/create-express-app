@@ -12,6 +12,17 @@ npx @phazero/create-express-app
 npm install -g @phazero/create-express-app
 ```
 
+## Features
+
+Here's a list of options that this CLI supports now
+
+- `--git` or `-g` for initializing the repo with git.
+- `--install` or `-i` for installing the default dependecies.
+- `--name` or `-n` for the project's folder.
+- `--husky` or `-h` for setting up husky to run `npm scripts` when git hooks are fired.
+- `--linters` for installing `ESlint` & `Prettier` dependecies and setting up ther default configuration.
+- `--yes` or `-y` for using the default configuration (note that the default project name is `new-project`).
+
 ## Feature requests
 
 Please follow this [issue template](https://github.com/PhazeRoOman/create-express-app/issues/new?assignees=&labels=type%3AEnhancement&template=FEATURE_REQUEST.md&title=) when creating feature requests.
