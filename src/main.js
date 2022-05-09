@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import fs from "fs/promises";
-import { constants } from "fs";
+import { constants, existsSync } from "fs";
 import ncp from "ncp";
 import cpFile from "cp-file";
 import path from "path";
@@ -110,7 +110,7 @@ export async function createProject(options) {
       title: "Setting up husky",
       task: async () => {
         await initHusky(options);
-        if (WINDOWS && fs.existsSync(`${options.targetDirectory}/6`)) {
+        if (WINDOWS && existsSync(`${options.targetDirectory}/6`)) {
           await fs.rm(`${options.targetDirectory}/6`);
         }
       },
