@@ -1,6 +1,6 @@
 {
   "name": "@phazero/create-express-app",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A basic cli that creates a backend service.",
   "main": "src/index.js",
   "bin": {
@@ -45,5 +45,8 @@
     "mkdirp": "^1.0.4",
     "ncp": "^2.0.0",
     "pkg-install": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31"
   }
 }

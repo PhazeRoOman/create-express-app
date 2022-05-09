@@ -118,7 +118,7 @@ export async function cli(args) {
       chalk
         .hex("#50c9f5")
         .bold(
-          "Welcome to create express App,\nFollow these steps to setup your project"
+          "Welcome to Create Express App,\nFollow these steps to setup your project"
         ),
       {
         textAlignment: "center",

@@ -1,5 +1,6 @@
 import chalk from "chalk";
-import fs from "fs";
+import fs from "fs/promises";
+import { constants } from "fs";
 import ncp from "ncp";
 import cpFile from "cp-file";
 import path from "path";
@@ -15,8 +16,8 @@ import {
   installEslintAndPrettier,
   copyPrettierAndESlint,
 } from "./utils";
-const access = promisify(fs.access);
 const copy = promisify(ncp);
+const WINDOWS = os.platform() === "win32";
 
 async function copyTemplateFiles(options) {
   return Promise.all([
@@ -51,7 +52,7 @@ export async function createProject(options) {
     fullPathName.substring(fullPathName.indexOf("/")),
     "../../static"
   );
-  if (os.platform() == "win32") {
+  if (WINDOWS) {
     templateDir = templateDir.replace(/^(\w:\\)(\w:\\)/, "$2");
     staticDir = staticDir.replace(/^(\w:\\)(\w:\\)/, "$2");
   }
@@ -59,7 +60,7 @@ export async function createProject(options) {
   options.staticDirectory = staticDir;
 
   try {
-    await access(templateDir, fs.constants.R_OK);
+    await fs.access(templateDir, constants.R_OK);
   } catch (err) {
     console.log({ err });
     console.error("%s Invalid template name", chalk.red.bold("[ERROR]"));
@@ -107,7 +108,12 @@ export async function createProject(options) {
     },
     {
       title: "Setting up husky",
-      task: () => initHusky(options),
+      task: async () => {
+        await initHusky(options);
+        if (WINDOWS && fs.existsSync(`${options.targetDirectory}/6`)) {
+          await fs.rm(`${options.targetDirectory}/6`);
+        }
+      },
       skip: () => {
         return !(options.git && options.staticAnalysis && options.husky)
           ? "The repository has to be a git repository with default ESlint and prettier configs"
