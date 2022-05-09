@@ -17,6 +17,7 @@ import {
   copyPrettierAndESlint,
 } from "./utils";
 const copy = promisify(ncp);
+const WINDOWS = os.platform() === "win32";
 
 async function copyTemplateFiles(options) {
   return Promise.all([
@@ -51,7 +52,7 @@ export async function createProject(options) {
     fullPathName.substring(fullPathName.indexOf("/")),
     "../../static"
   );
-  if (os.platform() == "win32") {
+  if (WINDOWS) {
     templateDir = templateDir.replace(/^(\w:\\)(\w:\\)/, "$2");
     staticDir = staticDir.replace(/^(\w:\\)(\w:\\)/, "$2");
   }
@@ -109,10 +110,7 @@ export async function createProject(options) {
       title: "Setting up husky",
       task: async () => {
         await initHusky(options);
-        if (
-          os.platform() == "win32" &&
-          fs.existsSync(`${options.targetDirectory}/6`)
-        ) {
+        if (WINDOWS && fs.existsSync(`${options.targetDirectory}/6`)) {
           await fs.rm(`${options.targetDirectory}/6`);
         }
       },
