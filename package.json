@@ -45,5 +45,8 @@
     "mkdirp": "^1.0.4",
     "ncp": "^2.0.0",
     "pkg-install": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31"
   }
 }
