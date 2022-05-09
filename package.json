@@ -1,6 +1,6 @@
 {
   "name": "@phazero/create-express-app",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A basic cli that creates a backend service.",
   "main": "src/index.js",
   "bin": {
