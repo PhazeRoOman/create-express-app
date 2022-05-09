@@ -25,7 +25,7 @@ async function copyTemplateFiles(options) {
       clobber: false,
     }),
     cpFile(
-      `${options.staticDirectory}/.gitignore`,
+      `${options.staticDirectory}/.gitignore-template`,
       `${options.targetDirectory}/.gitignore`
     ),
   ]);
