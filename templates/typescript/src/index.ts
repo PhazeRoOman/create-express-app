@@ -1,13 +1,24 @@
 import { config } from "dotenv";
 config();
 import express from "express";
-import { PORT } from "./config";
+import cors from "cors";
+import morgan from "morgan";
+import cookies from "cookie-parser";
+import { AccessControlAllowOrigin, PORT } from "./config";
 import { errorMiddleware } from "./middlewares";
 import { usersRouter } from "./routes";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// parse cookies.
+app.use(cookies());
+// enable cross origin request.
+app.use(cors({ origin: AccessControlAllowOrigin }));
+// tiny logging.
+app.use(morgan("tiny"));
+
 //This is where you should add your different endpoint handlers
 app.use("/users", usersRouter);
 //Don't remove any of these unless you have to
