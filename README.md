@@ -20,6 +20,7 @@ Here's a list of options that this CLI supports now
 - `--install` or `-i` for installing the default dependecies.
 - `--name` or `-n` for the project's folder.
 - `--husky` or `-h` for setting up husky to run `npm scripts` when git hooks are fired.
+- `--jest` or `-j` for setting up jest testing library, run `npm run test` to run your tests.
 - `--linters` for installing `ESlint` & `Prettier` dependecies and setting up ther default configuration.
 - `--yes` or `-y` for using the default configuration (note that the default project name is `new-project`).
 
