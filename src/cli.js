@@ -17,6 +17,7 @@ function parseArgumentsIntoOptions(rawArgs) {
       "-i": "--install",
       "-n": "--name",
       "-h": "--husky",
+      "-j": "--jest",
     },
     {
       //slice(2) because we don't need the first two args
@@ -31,6 +32,7 @@ function parseArgumentsIntoOptions(rawArgs) {
     runInstall: args["--install"] || false,
     projectName: args["--name"] || "",
     husky: args["--husky"] || false,
+    jest: args["--jest"] || false,
   };
 }
 
@@ -91,6 +93,15 @@ async function promptForMissingOptions(options) {
     });
   }
 
+  if (!options.jest) {
+    questions.push({
+      type: "confirm",
+      name: "jest",
+      message: "Do you wish to setup Jest for this project?",
+      default: false,
+    });
+  }
+
   if (!options.runInstall) {
     questions.push({
       type: "confirm",
@@ -109,6 +120,7 @@ async function promptForMissingOptions(options) {
     projectName: options.projectName || answers.projectName,
     staticAnalysis: answers.staticAnalysis,
     husky: (options.husky || answers.husky) && answers.staticAnalysis,
+    jest: answers.jest,
   };
 }
 
@@ -130,12 +142,6 @@ export async function cli(args) {
         borderStyle: "double",
       }
     ) + "\n"
-  );
-  console.log(
-    chalk.hex("#edf2ff")(
-      "Author: Yacine BENKAIDALI <yacine.benkaidali@phaze.ro>"
-    ),
-    "\n"
   );
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);

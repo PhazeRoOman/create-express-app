@@ -48,5 +48,22 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.31"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Yacine BENKAIDALI",
+      "email": "yacine.benkaidali@phaze.ro",
+      "url": "https://github.com/yacinebenkaidali"
+    },
+    {
+      "name": "Maymoona AlBoloshi",
+      "email": "Maymoona.Balushi@phaze.ro",
+      "url": "https://github.com/MaymoonaAlBoloshi"
+    },
+    {
+      "name": "Akram Benrandja",
+      "email": "fa_benrandja@esi.dz",
+      "url": "https://github.com/benrandja-akram"
+    }
+  ]
 }
