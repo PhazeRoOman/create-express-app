@@ -15,6 +15,8 @@ import {
   initGit,
   installEslintAndPrettier,
   copyPrettierAndESlint,
+  installJest,
+  copyJestTypeScriptConfig,
 } from "./utils";
 const copy = promisify(ncp);
 const WINDOWS = os.platform() === "win32";
@@ -119,6 +121,17 @@ export async function createProject(options) {
           ? "The repository has to be a git repository with default ESlint and prettier configs"
           : undefined;
       },
+    },
+    {
+      title: "Setting up Jest and copying its config file",
+      task: async () => {
+        await installJest({
+          workingDirectory: options.targetDirectory,
+          typescript: options.template.toLowerCase() === "typescript",
+        });
+        await copyJestTypeScriptConfig(options);
+      },
+      enabled: () => options.jest,
     },
     {
       title: "Making first commit",

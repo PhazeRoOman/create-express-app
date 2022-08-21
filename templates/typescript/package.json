@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only src",
-    "start": "npm run build && node dist"
+    "start": "npm run build && node dist",
+    "test": "npx jest"
   },
   "keywords": [],
   "author": "Yacine BENKAIDALI <yacinebenkaidali@gmail.com>",
