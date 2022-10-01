@@ -36,7 +36,18 @@ async function copyTemplateFiles(options) {
 async function createDirectory(options) {
   return mkdirp(`./${options.projectName}`);
 }
-
+async function updatePackageJson(options) {
+  const fileContent = JSON.parse(
+    (await fs.readFile(`./${options.projectName}/package.json`)).toString(
+      "utf-8"
+    )
+  );
+  fileContent["name"] = options.projectName.replace(" ", "-");
+  await fs.writeFile(
+    `./${options.projectName}/package.json`,
+    JSON.stringify(fileContent, null, 4)
+  );
+}
 export async function createProject(options) {
   options = {
     ...options,
@@ -77,6 +88,10 @@ export async function createProject(options) {
     {
       title: "Copy project files",
       task: () => copyTemplateFiles(options),
+    },
+    {
+      title: "Update package.json info",
+      task: () => updatePackageJson(options),
     },
     {
       title: "Initialize git",
